@@ -4,7 +4,6 @@ class Api {
     this._headers = options.headers;
   };
 
-
   /* Ответ от сервера всегда проверяется на корректность */
 
   _checkCorrectness(res) {
@@ -15,7 +14,6 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   };
   
-
   /* Получить карточки с сервера */
 
   getInitialCards() {
@@ -26,7 +24,6 @@ class Api {
     .then(this._checkCorrectness);
   };
  
-
   /* Получить информацию о пользователе с сервера */
 
   getUserData() {
@@ -36,7 +33,6 @@ class Api {
     })
     .then(this._checkCorrectness);
   };
-
 
   /* Установить обновленные данные пользователя на сервер */
 
@@ -52,7 +48,6 @@ class Api {
     .then(this._checkCorrectness);
   };
 
-
   /* Установить аватар пользователя на сервере */
 
   patchUserAvatar(data) {
@@ -65,7 +60,6 @@ class Api {
     })
     .then(this._checkCorrectness);
   };
-
 
   /* Отправить данные новой карточки на сервер */
 
@@ -81,7 +75,6 @@ class Api {
     .then(this._checkCorrectness);
   };
 
-
   /* Удалить карточку с сервера */
 
   deleteCard(id) {
@@ -92,7 +85,6 @@ class Api {
     .then(this._checkCorrectness);
   };
 
-
   /* Поставить лайк */
 
   putLike(id) {
@@ -102,7 +94,6 @@ class Api {
     })
     .then(this._checkCorrectness);
   };
-
 
   /* Удалить лайк */
 
