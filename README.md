@@ -1,7 +1,7 @@
 **Проект для Яндекс.Практикум Mesto-React "Mesto Russia".**
 
 **Cсылка на готовый проект**
-* [Ссылка на проект Mesto Russia](https://ianapylaeva.github.io/mesto/)
+* [Ссылка на проект Mesto Russia](https://ianapylaeva.github.io/mesto-react/)
 
 
 Проектная работа помогла закрепить знания и навыки разметки и адаптивной вёрстки HTML и CSS, написано часть логики на JavaScript(создание всплывающей формы pop-up, редактирование имени и информации о себе в соответствующих полях страницы), работа с Figma, Git, React.
