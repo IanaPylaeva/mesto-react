@@ -5,7 +5,6 @@ class Api {
   };
 
   /* Ответ от сервера всегда проверяется на корректность */
-
   _checkCorrectness(res) {
     if (res.ok) {
       return res.json();
@@ -15,7 +14,6 @@ class Api {
   };
   
   /* Получить карточки с сервера */
-
   getInitialCards() {
     return fetch(`${this._serverUrl}/cards`, {
       method: 'GET',
@@ -25,7 +23,6 @@ class Api {
   };
  
   /* Получить информацию о пользователе с сервера */
-
   getUserData() {
     return fetch(`${this._serverUrl}/users/me`, {
       method: 'GET',
@@ -35,7 +32,6 @@ class Api {
   };
 
   /* Установить обновленные данные пользователя на сервер */
-
   patchUserInfo(data) {
     return fetch(`${this._serverUrl}/users/me`, {
       method: 'PATCH',
@@ -49,34 +45,31 @@ class Api {
   };
 
   /* Установить аватар пользователя на сервере */
-
   patchUserAvatar(data) {
     return fetch(`${this._serverUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: data.link,
+        avatar: data.avatar,
       })
     })
     .then(this._checkCorrectness);
   };
 
   /* Отправить данные новой карточки на сервер */
-
-  postCard(data) {
+  postCard(card) {
     return fetch(`${this._serverUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: data.name,
-        link: data.link,
+        name: card.name,
+        link: card.link,
       })
     })
     .then(this._checkCorrectness);
   };
 
   /* Удалить карточку с сервера */
-
   deleteCard(id) {
     return fetch(`${this._serverUrl}/cards/${id}`, {
     method: 'DELETE',
@@ -86,7 +79,6 @@ class Api {
   };
 
   /* Поставить лайк */
-
   putLike(id) {
     return fetch(`${this._serverUrl}/cards/${id}/likes`, {
     method: 'PUT',
@@ -96,7 +88,6 @@ class Api {
   };
 
   /* Удалить лайк */
-
   deleteLike(id) {
     return fetch(`${this._serverUrl}/cards/${id}/likes`, {
     method: 'DELETE',
