@@ -36,9 +36,9 @@ function AddPlacePopup(props) {
   return (
     <PopupWithForm
       isOpen={props.isOpen}
-      popupType={`card-add`}
+      popupType="card-add"
       title="Новое место"
-      popupNameForm={`addform`}
+      popupNameForm={`addForm`}
       submitButtonText="Создать"
       onClose={props.onClose}
       onCloseClick={props.onCloseClick}
@@ -46,7 +46,7 @@ function AddPlacePopup(props) {
     >
       <div className="popup__input-container">
         <input
-          id="placename-input"
+          id="popup__text_name"
           type="text"
           className="popup__text popup__text_type_place"
           name="name"
@@ -57,9 +57,9 @@ function AddPlacePopup(props) {
           onChange={handlePlaceNameAdd}
           required
         />
-        <span className="popup__text-error placename-input-error"></span>
+        <span className="popup__text-error popup__text_name-error"></span>
         <input
-          id="placelink-input"
+          id="popup__text_link"
           type="url"
           className="popup__text popup__text_type_link"
           name="link"
@@ -68,7 +68,7 @@ function AddPlacePopup(props) {
           onChange={handlePlaceLinkAdd}
           required
         />
-        <span className="popup__text-error placelink-input-error"></span>
+        <span className="popup__text-error popup__text_link-error"></span>
       </div>
     </PopupWithForm>
   )

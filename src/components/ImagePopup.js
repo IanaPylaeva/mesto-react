@@ -1,15 +1,19 @@
 import React from "react";
 
 const ImagePopup = (props) => {
+  const propsCardName = props.card ? props.card.name : '';
   return(
-    <div className={`popup popup_type_picture ${props.card.link !== '' && "popup_opened"}`} onClick={props.onCloseClick}>
-      <article className="popup__piccontainer">
+    <div 
+      className={`popup popup_type_picture ${props.card.link !== '' && "popup_opened"}`}
+      onClick={props.onCloseClick}
+    >
+      <article className="popup__pic-container">
         <img
-          src={`${props.card ? props.card.link : ''}`}
-          alt={`${props.card ? props.card.name : ''}`}
+          src={props.card ? props.card.link : ''}
+          alt={propsCardName}
           className="popup__zoom"
         />
-        <p className="popup__caption">{props.card ? props.card.name : ''}</p>
+        <p className="popup__caption">{propsCardName}</p>
         <button
           type="button"
           aria-label="Закрыть"

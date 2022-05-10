@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {api} from "../utils/Api.js";
+import {api} from "../utils/api.js";
 import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
@@ -7,13 +7,15 @@ import ImagePopup from "./ImagePopup.js";
 import EditProfilePopup from "./EditProfilePopup.js";
 import EditAvatarPopup from "./EditAvatarPopup.js";
 import AddPlacePopup from "./AddPlacePopup.js";
+/*import Popup from "./Popup.js";*/
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState({name: '', link: ''});
+  const defaultSelectedCard = { name: '', link: '' };
+  const [selectedCard, setSelectedCard] = React.useState(defaultSelectedCard);
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
 
@@ -46,12 +48,13 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);// Снова проверяем, есть ли уже лайк на этой карточке
     
-    (!isLiked ? api.putLike(card._id) : api.deleteLike(card._id))
+    const action = !isLiked ? api.putLike(card._id) : api.deleteLike(card._id);
+    action
       .then((newCard) => {
         setCards((state) => 
         state.map((c) => c._id === card._id ? newCard : c))
       }).catch((err) => {
-      console.error(err)
+        console.error(err)
       });    
   }
 
@@ -103,21 +106,24 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
-    setSelectedCard({name: '', link: ''});
+    setSelectedCard(defaultSelectedCard);
   }
 
+  
   /* Закрытие попапа по ESC */
-  useEffect(() => {
+  
+  useEffect(() => { 
     function handleEsc(evt) {
       if (evt.key === "Escape") {
         closeAllPopups();
       }
     }
-    document.addEventListener("keydown", handleEsc);
-    return () => {
-      document.removeEventListener("keydown", handleEsc);
-    }
-  }, [])
+      document.addEventListener("keydown", handleEsc);
+      return () => {
+        document.removeEventListener("keydown", handleEsc);
+      }
+  }, []);
+  
 
   /* Закрытие по оверлей */
   function handlePopupCloseClick(evt) {
@@ -125,6 +131,7 @@ function App() {
       closeAllPopups();
     }
   }
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

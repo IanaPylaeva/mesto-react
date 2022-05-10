@@ -31,7 +31,7 @@ function Card(props) {
     <div id="elementtemplate">
       <div className="element">
         <img
-          src={`${link}`}
+          src={link}
           alt={name}
           className="element__mask-group"
           onClick={handleClick}
