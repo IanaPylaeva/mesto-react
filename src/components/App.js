@@ -108,10 +108,8 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setSelectedCard(defaultSelectedCard);
   }
-
   
   /* Закрытие попапа по ESC */
-  
   useEffect(() => { 
     function handleEsc(evt) {
       if (evt.key === "Escape") {
@@ -123,7 +121,6 @@ function App() {
         document.removeEventListener("keydown", handleEsc);
       }
   }, []);
-  
 
   /* Закрытие по оверлей */
   function handlePopupCloseClick(evt) {
@@ -131,7 +128,6 @@ function App() {
       closeAllPopups();
     }
   }
-
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
