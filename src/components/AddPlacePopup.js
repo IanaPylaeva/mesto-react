@@ -41,7 +41,6 @@ function AddPlacePopup(props) {
       popupNameForm={`addForm`}
       submitButtonText="Создать"
       onClose={props.onClose}
-      onCloseClick={props.onCloseClick}
       onSubmit={handleSubmit}
     >
       <div className="popup__input-container">

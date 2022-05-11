@@ -5,7 +5,6 @@ const ImagePopup = (props) => {
   return(
     <div 
       className={`popup popup_type_picture ${props.card.link !== '' && "popup_opened"}`}
-      onClick={props.onCloseClick}
     >
       <article className="popup__pic-container">
         <img

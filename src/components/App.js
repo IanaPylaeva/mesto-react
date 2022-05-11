@@ -7,7 +7,6 @@ import ImagePopup from "./ImagePopup.js";
 import EditProfilePopup from "./EditProfilePopup.js";
 import EditAvatarPopup from "./EditAvatarPopup.js";
 import AddPlacePopup from "./AddPlacePopup.js";
-/*import Popup from "./Popup.js";*/
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 function App() {
@@ -109,26 +108,6 @@ function App() {
     setSelectedCard(defaultSelectedCard);
   }
   
-  /* Закрытие попапа по ESC */
-  useEffect(() => { 
-    function handleEsc(evt) {
-      if (evt.key === "Escape") {
-        closeAllPopups();
-      }
-    }
-      document.addEventListener("keydown", handleEsc);
-      return () => {
-        document.removeEventListener("keydown", handleEsc);
-      }
-  }, []);
-
-  /* Закрытие по оверлей */
-  function handlePopupCloseClick(evt) {
-    if (evt.target.classList.contains('popup')) {
-      closeAllPopups();
-    }
-  }
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
@@ -147,24 +126,20 @@ function App() {
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
         onUpdateUser={handleUpdateUser}
-        onCloseClick={handlePopupCloseClick}
       />
       <AddPlacePopup
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
-        onCloseClick={handlePopupCloseClick}
         onAddNewPlace={handleAddPlaceSubmit}
       />      
       <EditAvatarPopup
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
-        onCloseClick={handlePopupCloseClick}
         onUpdateAvatar={handleAvatarUpdate}
       />      
       <ImagePopup
         card={selectedCard}
         onClose={closeAllPopups}
-        onCloseClick={handlePopupCloseClick}
       />
     </div>
     </CurrentUserContext.Provider>
