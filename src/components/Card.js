@@ -28,7 +28,7 @@ function Card(props) {
   }
 
   return (
-    <div id="elementtemplate">
+    <div id="elementTemplate">
       <div className="element">
         <img
           src={link}

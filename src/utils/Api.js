@@ -1,4 +1,4 @@
-class Api {
+class api {
   constructor(options) {
     this._serverUrl = options.serverUrl;
     this._headers = options.headers;
@@ -98,7 +98,7 @@ class Api {
 
 };
 
-export const api = new Api({
+export const apiData = new api({
   serverUrl: 'https://mesto.nomoreparties.co/v1/cohort-39',//Адрес сервера проекта Mesto
   headers: {
     authorization: 'a8870c90-962a-4e80-9995-2681c6a34a53',//Мой токен

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {api} from "../utils/api.js";
+import {apiData} from "../utils/api.js";
 import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
@@ -9,18 +9,19 @@ import EditAvatarPopup from "./EditAvatarPopup.js";
 import AddPlacePopup from "./AddPlacePopup.js";
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
+const defaultSelectedCard = { name: '', link: '' };
+
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const defaultSelectedCard = { name: '', link: '' };
   const [selectedCard, setSelectedCard] = React.useState(defaultSelectedCard);
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
 
   /* Одновременное получение данных пользователя и карточек */
   useEffect(() => { 
-    Promise.all([api.getUserData(), api.getInitialCards()])
+    Promise.all([apiData.getUserData(), apiData.getInitialCards()])
       .then((res) => {
         setCurrentUser(res[0]);
         setCards(res[1]);
@@ -47,7 +48,7 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);// Снова проверяем, есть ли уже лайк на этой карточке
     
-    const action = !isLiked ? api.putLike(card._id) : api.deleteLike(card._id);
+    const action = !isLiked ? apiData.putLike(card._id) : apiData.deleteLike(card._id);
     action
       .then((newCard) => {
         setCards((state) => 
@@ -59,7 +60,7 @@ function App() {
 
   /* Удаляет карточку */
   function handleCardDelete(card) {
-    api.deleteCard(card._id)
+    apiData.deleteCard(card._id)
       .then (() => {
         setCards(items => items.filter((i) => i._id !== card._id));
       }).catch((err) => {
@@ -69,7 +70,7 @@ function App() {
 
   /* Обновляет данные пользователя */
   function handleUpdateUser(data) {
-    api.patchUserInfo(data)
+    apiData.patchUserInfo(data)
       .then(newUser => {
         setCurrentUser(newUser);
         closeAllPopups();
@@ -80,7 +81,7 @@ function App() {
 
   /* Обновляет аватар */
   function handleAvatarUpdate(data) {
-    api.patchUserAvatar(data)
+    apiData.patchUserAvatar(data)
       .then(newAvatar => {
         setCurrentUser(newAvatar);
         closeAllPopups();
@@ -91,7 +92,7 @@ function App() {
 
   /* Добавляет карточку */
   function handleAddPlaceSubmit(card) {
-    api.postCard(card)
+    apiData.postCard(card)
     .then(data => {
       setCards([data, ...cards]);
       closeAllPopups();
