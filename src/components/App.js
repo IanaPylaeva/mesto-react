@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {apiData} from "../utils/api.js";
+import {api} from "../utils/api.js";
 import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
@@ -21,7 +21,7 @@ function App() {
 
   /* Одновременное получение данных пользователя и карточек */
   useEffect(() => { 
-    Promise.all([apiData.getUserData(), apiData.getInitialCards()])
+    Promise.all([api.getUserData(), api.getInitialCards()])
       .then((res) => {
         setCurrentUser(res[0]);
         setCards(res[1]);
@@ -48,7 +48,7 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);// Снова проверяем, есть ли уже лайк на этой карточке
     
-    const action = !isLiked ? apiData.putLike(card._id) : apiData.deleteLike(card._id);
+    const action = !isLiked ? api.putLike(card._id) : api.deleteLike(card._id);
     action
       .then((newCard) => {
         setCards((state) => 
@@ -60,7 +60,7 @@ function App() {
 
   /* Удаляет карточку */
   function handleCardDelete(card) {
-    apiData.deleteCard(card._id)
+    api.deleteCard(card._id)
       .then (() => {
         setCards(items => items.filter((i) => i._id !== card._id));
       }).catch((err) => {
@@ -70,7 +70,7 @@ function App() {
 
   /* Обновляет данные пользователя */
   function handleUpdateUser(data) {
-    apiData.patchUserInfo(data)
+    api.patchUserInfo(data)
       .then(newUser => {
         setCurrentUser(newUser);
         closeAllPopups();
@@ -81,7 +81,7 @@ function App() {
 
   /* Обновляет аватар */
   function handleAvatarUpdate(data) {
-    apiData.patchUserAvatar(data)
+    api.patchUserAvatar(data)
       .then(newAvatar => {
         setCurrentUser(newAvatar);
         closeAllPopups();
@@ -92,7 +92,7 @@ function App() {
 
   /* Добавляет карточку */
   function handleAddPlaceSubmit(card) {
-    apiData.postCard(card)
+    api.postCard(card)
     .then(data => {
       setCards([data, ...cards]);
       closeAllPopups();
